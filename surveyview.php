@@ -26,7 +26,7 @@
         <div class="blank"></div>
             <div class="header">
                 <div class="logo"><img src="images/logo.png"/></div>
-                <div class="header-title">北京工业职业技术学院-问卷调查系统</div>
+                <div class="header-title">问卷调查系统</div>
             </div>
             <div class="main">
                 <div class="blank"></div>
