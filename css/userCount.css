@@ -1,0 +1,37 @@
+  ul li{
+        float: left;
+      list-style:none;
+      width:500px;
+      text-align:center;
+      color: blue;
+      font-family: "微软雅黑";
+      font-size: 18px;
+
+      
+    }
+    ul{
+        width:1000px;
+        margin:0 auto;
+        
+    }
+    .part,.yetPart{
+        width:500px;
+        float:left;
+        border: 1px  solid black;
+        height:auto;
+        margin:20px;
+    }
+
+    .container{
+        width:1200px;
+        margin:0 auto;
+    }
+p{
+    margin:0 auto;text-align:center; width:1200px; font-size:18px;line-height:2em;background-color:gold;margin-bottom:50px;
+}
+.tab{
+    width: 100%;
+    border: 1px;
+   text-align: center;
+ 
+}
