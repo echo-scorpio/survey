@@ -32,15 +32,7 @@
             $times=mysql_query("select times from tb_survey where SurId='$surid'");
             $times_arr=mysql_fetch_array($times);
             $timesupdate=$times_arr[times]+1;
-            //跟新问卷提交的次数
-            mysql_query("update tb_survey set times='$timesupdate' where SurId='$surid' ");
             
-            //保存TXT留言及联系方式
-            mysql_query("set sql_mode='' ");
-            $time=time();//获取当前时间
-            //将数据插入到记录邮箱及留言的表中
-            $a=mysql_query("insert into tb_user values ('','$surid','$mail','$note','$time') ");
-            //echo $a;
 
             //查询当前问卷调查 总题数
             $maxNum=mysql_query("select * from tb_question where SurId = '$surid' ");
@@ -58,7 +50,15 @@
             }
             //题答完以后进行下面的操作
             else{
-
+                //跟新问卷提交的次数
+            mysql_query("update tb_survey set times='$timesupdate' where SurId='$surid' ");
+            
+            //保存TXT留言及联系方式
+            mysql_query("set sql_mode='' ");
+            $time=time();//获取当前时间
+            //将数据插入到记录邮箱及留言的表中
+            $a=mysql_query("insert into tb_user values ('','$surid','$mail','$note','$time') ");
+            //echo $a;
                 //遍历选项，更新次数
                 //$name是QueId,$value是选择的选项：问题选项
                  foreach($_POST as $name=>$value){
@@ -85,9 +85,9 @@
                 }
             
             }
-                      //echo "<script>alert('问卷提交成功，感谢您的参与');this.location='index.php'</script>";
+                      echo "<script>alert('问卷提交成功，感谢您的参与');this.location='index.php'</script>";
 
-                      echo $user_name;
+                      //echo $user_name;
                       //向用户完成统计表中插入用户ID和问卷ID
                      mysql_query("insert into tb_usercount values ('','$user_name','$surid')");
 
