@@ -26,7 +26,7 @@
         <div class="blank"></div>
             <div class="header">
                 <div class="logo"><img src="images/logo.png"/></div>
-                <div class="header-title">问卷调查系统</div>
+                <div class="header-title">北京工业职业技术学院-问卷调查系统</div>
             </div>
             <div class="main">
                 <div class="blank"></div>
@@ -52,7 +52,8 @@
 			//遍历样式：<dl>  <dt>问题</dt>  <dd>答案</dd>  </dl>
 			while($question_arr = mysql_fetch_array($question)){
 				$j='A';
-				echo "<dl id='tm{$i}'> <dt><b> {$i}、{$question_arr[Title]}</b></dt> ";
+				if($question_arr[Type]!="textarea"){
+					echo "<dl id='tm{$i}'> <dt><b> {$i}、{$question_arr[Title]}</b></dt> ";
 				
 				$answer=mysql_query("SELECT * FROM tb_answer WHERE QueId= '$question_arr[QueId]' ORDER by AnsId");
 				
@@ -63,6 +64,7 @@
 						echo "<dd> <input id='atm{$i}' type='$question_arr[Type]' name='q$question_arr[QueId]' value='$answer_arr[Content]'> {$j}.{$answer_arr[Content]}  </dd> ";
 						$j++;
 					}
+					$i++;
 				}
 				//多选样式----选项name为数组样式！！！
 				if($question_arr[Type]=="checkbox"){
@@ -71,12 +73,12 @@
 						echo "<dd> <input id='atm{$i}' type='$question_arr[Type]' name='q$question_arr[QueId][]' value='$answer_arr[Content]'> {$j}.{$answer_arr[Content]}  </dd> ";
 						$j++;
 					}
+					$i++;
 				}
 				//文本框样式
-				
-				
 				echo "</dl>";
-				$i++;
+				}
+				
 			}
 
             //让文本框显示在最下方
@@ -85,6 +87,7 @@
                     if($question_arr[Type]=="textarea"){
                         echo "<dl id='tm{$i}'> <dt><b> {$i}、{$question_arr[Title]}</b></dt> ";
 					 echo "<dd><textarea name='note' class='notebook' cols='75' rows='5'>请输入留言</textarea></dd></dl>"; 
+					 $i++;
 				}
             }
 
