@@ -11,18 +11,21 @@
     $note=$_POST[note];
     $mail=$_POST[mail];
 
-    $user_name=$_SESSION['name'];
-    //echo $user_name;
-
-   // echo $submit.','.$note.$mail."<br/>";
+    $user_name=$_SESSION['name1'];
+   
 
     //建立cookies
-    srand((double) time (NULL));
+  /*  srand((double) time (NULL));
     $randvalue = rand();
     setcookie($surid,$randvalue,time()+3600*24*30);//cookie保存一个月
 
     //判断cookie是否已经存在，是否已经参与
     if(isset($_COOKIE[$surid])){
+        echo "<script>alert('您已经参与此问卷调查，请不要重复参与，谢谢!');window.location.href='index.php';</script>";
+    }*/
+    $answered=mysql_query("select * from tb_user_answered where uid=$user_name and sid=$surid");
+    $whether_answered=mysql_num_rows($answered);
+    if($whether_answered!=0){//已经答过题，不能再提交
         echo "<script>alert('您已经参与此问卷调查，请不要重复参与，谢谢!');window.location.href='index.php';</script>";
     }
 
@@ -35,16 +38,17 @@
             
 
             //查询当前问卷调查 总题数
-            $maxNum=mysql_query("select * from tb_question where SurId = '$surid' ");
-            $totalRows=mysql_num_rows($maxNum);
+            $totalNum=mysql_query("select * from tb_question where SurId = '$surid'");
+            $maxNum=mysql_query("select * from tb_question where SurId = '$surid' and Type=='textarea'");
+            $totalRows=mysql_num_rows($totalNum);
+            $openQ_num=mysql_num_rows($maxNum);
                   $i=1;
             foreach($_POST as $name=>$value){
-                 //echo $name.','.$value."<br/>";
                 $i++;
             }
            
             //当答题数小于总题数+2时（开放题可以不回答），证明题没有答完，不能提交
-             if($i<=$totalRows+2){
+             if($i<=$totalRows+$openQ_num){
                    echo "<script>alert('请完整填写选择题！');window.history.go(-1);</script>";
  
             }
@@ -58,7 +62,6 @@
             $time=time();//获取当前时间
             //将数据插入到记录邮箱及留言的表中
             $a=mysql_query("insert into tb_user values ('','$surid','$mail','$note','$time') ");
-            //echo $a;
                 //遍历选项，更新次数
                 //$name是QueId,$value是选择的选项：问题选项
                  foreach($_POST as $name=>$value){
@@ -89,11 +92,11 @@
 
                       //echo $user_name;
                       //向用户完成统计表中插入用户ID和问卷ID
-                     mysql_query("insert into tb_usercount values ('','$user_name','$surid')");
+                     mysql_query("insert into tb_user_answered values ('','$user_name','$surid')");
 
 
             }
-
+                
 
             
            
