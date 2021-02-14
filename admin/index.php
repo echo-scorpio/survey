@@ -154,6 +154,7 @@ END;
             <div class="header">
                 <div class="logo"><img src="../images/logo.png" width="30px" height="30px"/></div>
                 <div class="header-title">北京工业职业技术学院-问卷调查系统</div>
+                <div class="log-out" onclick="logout()">退出</div>
             </div>
             <div class="main">
                 <div class="blank"></div>
@@ -165,4 +166,9 @@ END;
             </div>
     </div>
 </body>
+<script>
+    function logout() {
+        window.open('./login.php');
+    }
+</script>
 </html>

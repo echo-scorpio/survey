@@ -38,11 +38,11 @@ $userCount=$count_arr['userId'];
   </tr>
   <tr>
       <?php 
-            $count=mysql_query("select * from tb_usercount where Surid = '$surid' order by Id");
+            $count=mysql_query("select uid,name from tb_user_info where uid in(select uid from tb_user_answered where sid = '$surid' order by id)");
             while($count_arr=mysql_fetch_array($count)){
                 echo "<tr>";
-                echo "<td>$count_arr[userId]</td>";
-               echo "<td>$count_arr[userName]</td>";
+                echo "<td>$count_arr[uid]</td>";
+               echo "<td>$count_arr[name]</td>";
                echo "</tr>";
             }
         
@@ -61,11 +61,11 @@ $userCount=$count_arr['userId'];
   </tr>
   <tr>
       <?php 
-             $no=mysql_query("select * from tb_userlogin where userId not in(select userId from tb_usercount)");
+             $no=mysql_query("select uid,name from tb_user_info where uid in(select userId from tb_userlogin where userId not in(select uid from tb_user_answered where sid='$surid'))");
               while($no_arr=mysql_fetch_array($no)){
                   echo "<tr>";
-                echo "<td>$no_arr[userID]</td>";             
-                 echo "<td>$no_arr[userName]</td>";
+                echo "<td>$no_arr[uid]</td>";             
+                 echo "<td>$no_arr[name]</td>";
                 echo "</tr>";              
                
 

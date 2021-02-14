@@ -37,13 +37,15 @@ function ViewResult(surid){
 
 //查看回收情况
 function ResultCount(surid){
-	//alert("aaaaaaaaaaa");
 	var previewwin = window.open("../admin/resultCount.php?surid="+surid);
 	previewwin.focus();  
 }
 
-function addUser(){
-	alert("aaaaaaaaaaa");
+function addUser(surid){
 	var previewwin = window.open("../admin/addUser.php");
 	previewwin.focus();  
+}
+//退出登录
+function userLogOut(){
+	window.open("../user_login.php")
 }
