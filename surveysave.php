@@ -13,16 +13,6 @@
 
     $user_name=$_SESSION['name1'];
    
-
-    //建立cookies
-  /*  srand((double) time (NULL));
-    $randvalue = rand();
-    setcookie($surid,$randvalue,time()+3600*24*30);//cookie保存一个月
-
-    //判断cookie是否已经存在，是否已经参与
-    if(isset($_COOKIE[$surid])){
-        echo "<script>alert('您已经参与此问卷调查，请不要重复参与，谢谢!');window.location.href='index.php';</script>";
-    }*/
     $answered=mysql_query("select * from tb_user_answered where uid=$user_name and sid=$surid");
     $whether_answered=mysql_num_rows($answered);
     if($whether_answered!=0){//已经答过题，不能再提交
@@ -38,17 +28,16 @@
             
 
             //查询当前问卷调查 总题数
-            $totalNum=mysql_query("select * from tb_question where SurId = '$surid'");
-            $maxNum=mysql_query("select * from tb_question where SurId = '$surid' and Type=='textarea'");
+            $totalNum=mysql_query("select * from tb_question where SurId = '$surid' and Type!='textarea'");
             $totalRows=mysql_num_rows($totalNum);
-            $openQ_num=mysql_num_rows($maxNum);
                   $i=1;
             foreach($_POST as $name=>$value){
-                $i++;
+                if($name!='submit' && $name!='note' &&$name!='mail'){
+                    $i++;
+                }
             }
-           
             //当答题数小于总题数+2时（开放题可以不回答），证明题没有答完，不能提交
-             if($i<=$totalRows+$openQ_num){
+             if($i<=$totalRows){
                    echo "<script>alert('请完整填写选择题！');window.history.go(-1);</script>";
  
             }
