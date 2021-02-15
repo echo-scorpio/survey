@@ -50,10 +50,12 @@
             mysql_query("set sql_mode='' ");
             $time=time();//获取当前时间
             //将数据插入到记录邮箱及留言的表中
-            $a=mysql_query("insert into tb_user values ('','$surid','$mail','$note','$time') ");
                 //遍历选项，更新次数
                 //$name是QueId,$value是选择的选项：问题选项
                  foreach($_POST as $name=>$value){
+                     if(substr($name,0,4)=='note' && $value!=''){
+                        $a=mysql_query("insert into tb_user values ('','$surid','$mail','$value','$time') ");
+                     }
                 $queid = substr($name,1);//截取$name使其只剩下id，去掉之前设置的q
                
                 //单选次数更新
