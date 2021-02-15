@@ -54,7 +54,8 @@
                 //$name是QueId,$value是选择的选项：问题选项
                  foreach($_POST as $name=>$value){
                      if(substr($name,0,4)=='note' && $value!=''){
-                        $a=mysql_query("insert into tb_user values ('','$surid','$mail','$value','$time') ");
+                        $qid=substr($name,4);
+                        $a=mysql_query("insert into tb_user values ('','$surid','$qid','$mail','$value','$time') ");
                      }
                 $queid = substr($name,1);//截取$name使其只剩下id，去掉之前设置的q
                
@@ -85,12 +86,11 @@
                       //向用户完成统计表中插入用户ID和问卷ID
                      mysql_query("insert into tb_user_answered values ('','$user_name','$surid')");
 
-
-            }
+            
                 
 
             
-           
+        }
            
 
           

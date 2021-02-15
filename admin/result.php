@@ -90,7 +90,7 @@ $survey_time=$survey_arr['times'];
                  while($question_arr=mysql_fetch_array($question)){
                         if($question_arr[Type]=='textarea'){
                             echo "<dl><dt><b>{$i}、{$question_arr[Title]}</b></dt>";
-                                 echo "<dd style='margin:5px 0 20px;text-align:center;font-size:20px;'><a text-align='center' href='noteview.php?surid=$surid'>查看留言</a></dd></dl>";
+                                 echo "<dd style='margin:5px 0 20px;text-align:center;font-size:20px;'><a text-align='center' href='noteview.php?surid=$surid&qid=$question_arr[QueId]'>查看留言</a></dd></dl>";
                         }
                  }
                 ?>

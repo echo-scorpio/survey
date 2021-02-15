@@ -86,7 +86,7 @@
             while($question_arr = mysql_fetch_array($question)){
                     if($question_arr[Type]=="textarea"){
                         echo "<dl id='tm{$i}'> <dt><b> {$i}、{$question_arr[Title]}</b></dt> ";
-					 echo "<dd><textarea placeholder='请输入留言' name='note$i' class='notebook' cols='75' rows='5'></textarea></dd></dl>"; 
+					 echo "<dd><textarea placeholder='请输入留言' name='note$question_arr[QueId]' class='notebook' cols='75' rows='5'></textarea></dd></dl>"; 
 					 $i++;
 				}
             }

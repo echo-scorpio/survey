@@ -9,14 +9,13 @@ login_check($_SESSION[name],$_SESSION[data]);//判断是否登录函数
 
 //获取参数
 $surid=$_GET[surid];
+$qid=$_GET[qid];
 //查询当前问卷名称
 $survey=mysql_query("select * from tb_survey where SurId = '$surid' ");
 $survey_arr=mysql_fetch_array($survey);
 $survey_name=$survey_arr[title];//查询当前问卷名称
 
-$user=mysql_query("select * from tb_user where SurId = '$surid' order by Id desc ");//查询填写了当前问卷的用户有哪些
-
-
+$user=mysql_query("select * from tb_user where SurId = '$surid' and queId='$qid' order by Id desc ");//查询填写了当前问卷的用户有哪些
 
 ?>
 
