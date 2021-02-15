@@ -61,7 +61,7 @@
 				if($question_arr[Type]=="radio"){	
 					//遍历答案
 					while($answer_arr=mysql_fetch_array($answer)){
-						echo "<dd> <input id='atm{$i}' type='$question_arr[Type]' name='q$question_arr[QueId]' value='$answer_arr[Content]'> {$j}.{$answer_arr[Content]}  </dd> ";
+						echo "<label><dd> <input id='atm{$i}' type='$question_arr[Type]' name='q$question_arr[QueId]' value='$answer_arr[Content]'> {$j}.{$answer_arr[Content]}  </dd> </dd>";
 						$j++;
 					}
 					$i++;
@@ -70,7 +70,7 @@
 				if($question_arr[Type]=="checkbox"){
 					//遍历答案
 					while($answer_arr=mysql_fetch_array($answer)){
-						echo "<dd> <input id='atm{$i}' type='$question_arr[Type]' name='q$question_arr[QueId][]' value='$answer_arr[Content]'> {$j}.{$answer_arr[Content]}  </dd> ";
+						echo "<label><dd> <input id='atm{$i}' type='$question_arr[Type]' name='q$question_arr[QueId][]' value='$answer_arr[Content]'> {$j}.{$answer_arr[Content]}  </dd></label> ";
 						$j++;
 					}
 					$i++;
@@ -86,7 +86,7 @@
             while($question_arr = mysql_fetch_array($question)){
                     if($question_arr[Type]=="textarea"){
                         echo "<dl id='tm{$i}'> <dt><b> {$i}、{$question_arr[Title]}</b></dt> ";
-					 echo "<dd><textarea name='note' class='notebook' cols='75' rows='5'>请输入留言</textarea></dd></dl>"; 
+					 echo "<dd><textarea placeholder ='请输入留言' name='note' class='notebook' cols='75' rows='5'></textarea></dd></dl>"; 
 					 $i++;
 				}
             }
